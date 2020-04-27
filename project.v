@@ -148,7 +148,8 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   assign YE0 = (ci_e|cw_e|(pre_y0_e != pre_y0_e_r))?1'b1:pre_y0_e_r;
   assign YE1 = (ci_e|cw_e|(pre_y1_e != pre_y1_e_r))?1'b1:pre_y1_e;
   endmodule
-  
+ 
+
   module one_bit_adder(a0,b0,c0,s0,c1);
   
   /* three inputs which are 1 bit each */
