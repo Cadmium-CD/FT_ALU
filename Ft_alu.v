@@ -145,8 +145,8 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   //Error checking
   assign pre_x0_e = ((pre_sum_1[0]^pre_sum_1_r[0]) | (pre_sum_1[1]^pre_sum_1_r[1])) & lc_err_1;
   assign pre_x0_e_r = ((pre_sum_1[0]^pre_sum_1_r[0]) | (pre_sum_1[1]^pre_sum_1_r[1])) & lc_err_1;
-  assign pre_x1_e = (~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r))) & (~lc_err_1);
-  assign pre_x1_e_r = (~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r))) & (~lc_err_1);
+  assign pre_x1_e = (~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r))) | (~lc_err_1);
+  assign pre_x1_e_r = (~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r))) | (~lc_err_1);
   
   assign pre_y0_e = (pre_sum_2[0]^pre_sum_2_r[0]) | (pre_sum_2[1]^pre_sum_2_r[1]);
   assign pre_y0_e_r= (pre_sum_2[0]^pre_sum_2_r[0]) | (pre_sum_2[1]^pre_sum_2_r[1]);
@@ -195,7 +195,7 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   assign dc_2 = A[0] & B[0];
   assign dc_3 = (dc_2 & A[1]) | (dc_2 & B[1]) | (A[1] & B[1]);
   
-  assign pcarry = dc_1 ^ dc_2 ^ dc_3;
+  assign pcarry = ~(dc_1 ^ dc_2 ^ dc_3);
   assign ps = ~(C[0] ^ C[1] ^ C[2]);
   assign er = (ps == (pa ^ pb ^ pcarry))? 1'b0:1'b1;
   
