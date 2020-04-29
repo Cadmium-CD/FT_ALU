@@ -43,43 +43,41 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   wire [2:0]post_b_r;
   wire [2:0]comp_a;
   wire [2:0]comp_b;
-  wire [2:0]comp_a_r;
-  wire [2:0]comp_b_r;
+  wire [2:0]comp_a_r_1;
+  wire [2:0]comp_a_r_2;
+  wire [2:0]comp_a_r_3;
+  wire [2:0]comp_b_r_1;
+  wire [2:0]comp_b_r_2;
+  wire [2:0]comp_b_r_3;
 
-  assign comp_a = {!A2,!A1,!A0} + 1;//TODO
-  assign comp_b = {!B2,!B1,!B0} + 1;
-  assign comp_a_r = {!A2,!A1,!A0} + 1;
-  assign comp_b_r = {!B2,!B1,!B0} + 1;
+  assign comp_a_r_1 = {!A2,!A1,!A0} + 1;
+  assign comp_a_r_2 = {!A2,!A1,!A0} + 1;
+  assign comp_a_r_3 = {!A2,!A1,!A0} + 1;
+
+  assign comp_b_r_1 = {!B2,!B1,!B0} + 1;
+  assign comp_b_r_2 = {!B2,!B1,!B0} + 1;
+  assign comp_b_r_3 = {!B2,!B1,!B0} + 1;
+  
+  tmr_voter_3bit tmr_voter_3bit_comp_a(comp_a_r_1,comp_a_r_2,comp_a_r_3,comp_a);
+  tmr_voter_3bit tmr_voter_3bit_comp_b(comp_b_r_1,comp_b_r_2,comp_b_r_3,comp_b);
   
   assign post_a = C2?comp_a:{A2,A1,A0};
-  assign post_b = C1?comp_b:{B2,B1,B0};
   assign post_a_r = C2?comp_a:{A2,A1,A0};
+  assign post_b = C1?comp_b:{B2,B1,B0};
   assign post_b_r = C1?comp_b:{B2,B1,B0};
   
   //Decode data using hamming code
   wire [2:0]hm_code_a;
   wire [2:0]hm_code_b;
-  wire [2:0]hm_code_carry;
   wire [2:0]hm_code_a_r;
   wire [2:0]hm_code_b_r;
-  wire [2:0]hm_code_carry_r;
 
   hm_encode hm_encode_1_a(post_a,hm_code_a);
   hm_encode hm_encode_1_b(post_b,hm_code_b);
-  hm_encode hm_encode_1_carry({w_adder_1[1],w_adder_1[0],1'b0},hm_code_carry);
 
   hm_encode hm_encode_1_a_r(post_a_r,hm_code_a_r);
   hm_encode hm_encode_1_b_r(post_b_r,hm_code_b_r);
-  hm_encode hm_encode_1_carry_r({w_adder_1_r[1],w_adder_1_r[0],1'b0},hm_code_carry_r);
 
-  //Correct error using hamming code
-  wire [2:0]post_sum_1;
-  wire [2:0]post_sum_1_r;
-  wire [2:0]hm_code_carry;
-  wire [2:0]hm_code_carry_r;
-
-  hm_err_cor hm_err_cor_1(pre_sum_1,hm_code_a,hm_code_b,hm_code_carry,post_sum_1);
-  hm_err_cor hm_err_cor_1_r(pre_sum_1_r,hm_code_a_r,hm_code_b_r,hm_code_carry_r,post_sum_1_r);
 
   //Adder1
   wire [2:0] a_1; 
@@ -99,9 +97,6 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   one_bit_adder
   adder_1_3(a_1[2],b_1[2],w_adder_1[1],pre_sum_1[2],cout_1);
   
-  assign X0 = post_sum_1[0];
-  assign X1 = post_sum_1[1];
-  assign X2 = post_sum_1[2];
   //Adder1 redundancy 
   wire [2:0] a_1_r; 
   wire [2:0] b_1_r;
@@ -115,6 +110,26 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   one_bit_adder adder_1_1_r(a_1_r[0],b_1_r[0],1'b0,pre_sum_1_r[0],w_adder_1_r[0]);
   one_bit_adder adder_1_2_r(a_1_r[1],b_1_r[1],w_adder_1_r[0],pre_sum_1_r[1],w_adder_1_r[1]);
   one_bit_adder adder_1_3_r(a_1_r[2],b_1_r[2],w_adder_1_r[1],pre_sum_1_r[2],cout_1_r);
+
+  //Correct error using hamming code
+  wire [2:0]post_sum_1;
+  wire [2:0]post_sum_1_r;
+  wire [2:0]hm_code_carry;
+  wire [2:0]hm_code_carry_r;
+
+  hm_encode hm_encode_1_carry({w_adder_1[1],w_adder_1[0],1'b0},hm_code_carry);
+  hm_encode hm_encode_1_carry_r({w_adder_1_r[1],w_adder_1_r[0],1'b0},hm_code_carry_r);
+  hm_err_cor hm_err_cor_1(pre_sum_1,hm_code_a,hm_code_b,hm_code_carry,post_sum_1);
+  hm_err_cor hm_err_cor_1_r(pre_sum_1_r,hm_code_a_r,hm_code_b_r,hm_code_carry_r,post_sum_1_r);
+
+  //assign value
+  assign X0 = post_sum_1[0];
+  assign X1 = post_sum_1[1];
+  assign X2 = post_sum_1[2];
+  //FIXME assign X0 = pre_sum_1[0];
+  //FIXME assign X1 = pre_sum_1[1];
+  //FIXME assign X2 = pre_sum_1[2];
+
   //Adder2
   wire [2:0] a_2; 
   wire [2:0] b_2;
@@ -165,6 +180,10 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   
   //Parity checking
   //FIXME assign pre_x0_e = (pre_sum_1[0]^pre_sum_1_r[0]) | (pre_sum_1[1]^pre_sum_1_r[1]);
+  //FIXME assign pre_x0_e_r = (pre_sum_1[0]^pre_sum_1_r[0]) | (pre_sum_1[1]^pre_sum_1_r[1]);
+  //FIXME assign pre_x1_e = !((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r));
+  //FIXME assign pre_x1_e_r = !((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r));
+  
   assign pre_x0_e = (post_sum_1[0]^post_sum_1_r[0]) | (post_sum_1[1]^post_sum_1_r[1]);
   assign pre_x0_e_r = (post_sum_1[0]^post_sum_1_r[0]) | (post_sum_1[1]^post_sum_1_r[1]);
   assign pre_x1_e = !((post_sum_1[2]^post_sum_1_r[2]) | (cout_1^cout_1_r));
@@ -264,6 +283,17 @@ endmodule
 
   endmodule 
 
+  module tmr_voter_3bit(a,b,c,v);
+    input [2:0]a;
+    input [2:0]b;
+    input [2:0]c;
+    output[2:0]v;
+    
+    tmr_voter voter_1(a[2],b[2],c[2],v[2]);
+    tmr_voter voter_2(a[1],b[1],c[1],v[1]);
+    tmr_voter voter_3(a[0],b[0],c[0],v[0]);
+
+  endmodule 
   module control_check(c0,c1,c2,er);
     input c0,c1,c2;
     output er;
