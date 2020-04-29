@@ -82,7 +82,10 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   
   assign a_1_r[2:0] = post_a[2:0]; 
   assign b_1_r[2:0] = post_b[2:0]; 
-  
+   
+
+
+ 
   one_bit_adder adder_1_1_r(a_1_r[0],b_1_r[0],1'b0,pre_sum_1_r[0],w_adder_1_r[0]);
   one_bit_adder adder_1_2_r(a_1_r[1],b_1_r[1],w_adder_1_r[0],pre_sum_1_r[1],w_adder_1_r[1]);
   one_bit_adder adder_1_3_r(a_1_r[2],b_1_r[2],w_adder_1_r[1],pre_sum_1_r[2],cout_1_r);
@@ -100,7 +103,7 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   assign a_2[2:0] = post_a[2:0]; 
   assign b_2[2:0] = post_b[2:0]; 
   assign YC       = cout_2; 
-  assign lc_err_2;
+  wire lc_err_2;
   
   one_bit_adder
   adder_2_1(a_2[0],b_2[0],1'b0,pre_sum_2[0],w_adder_2[0]);
@@ -140,14 +143,19 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   wire  pre_y0_e;
   wire  pre_y0_e_r;
   wire  pre_y1_e_r;
+  wire  pre_y1_e;
   
   
   //Error checking
   assign pre_x0_e = ((pre_sum_1[0]^pre_sum_1_r[0]) | (pre_sum_1[1]^pre_sum_1_r[1])) & lc_err_1;
   assign pre_x0_e_r = ((pre_sum_1[0]^pre_sum_1_r[0]) | (pre_sum_1[1]^pre_sum_1_r[1])) & lc_err_1;
-  assign pre_x1_e = (~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r))) | (~lc_err_1);
-  assign pre_x1_e_r = (~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r))) | (~lc_err_1);
-  
+  //assign pre_x1_e = (~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r))) | (~lc_err_1);
+  //assign pre_x1_e_r = (~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r))) | (~lc_err_1);
+  //assign pre_x0_e = (pre_sum_1[0]^pre_sum_1_r[0]) | (pre_sum_1[1]^pre_sum_1_r[1]);
+  //assign pre_x0_e_r = (pre_sum_1[0]^pre_sum_1_r[0]) | (pre_sum_1[1]^pre_sum_1_r[1]);
+  assign pre_x1_e = ~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r));
+  assign pre_x1_e_r = ~((pre_sum_1[2]^pre_sum_1_r[2]) | (cout_1^cout_1_r));
+
   assign pre_y0_e = (pre_sum_2[0]^pre_sum_2_r[0]) | (pre_sum_2[1]^pre_sum_2_r[1]);
   assign pre_y0_e_r= (pre_sum_2[0]^pre_sum_2_r[0]) | (pre_sum_2[1]^pre_sum_2_r[1]);
   assign pre_y1_e = ~((pre_sum_2[2]^pre_sum_2_r[2]) | (cout_2^cout_2_r));
