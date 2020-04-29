@@ -90,12 +90,12 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   assign b_1[2:0] = post_b[2:0]; 
   assign XC       = cout_1; 
   
-  one_bit_adder
-  adder_1_1(a_1[0],b_1[0],1'b0,pre_sum_1[0],w_adder_1[0]);
-  one_bit_adder
-  adder_1_2(a_1[1],b_1[1],w_adder_1[0],pre_sum_1[1],w_adder_1[1]);
-  one_bit_adder
-  adder_1_3(a_1[2],b_1[2],w_adder_1[1],pre_sum_1[2],cout_1);
+  one_bit_adder adder_1_1(a_1[0],b_1[0],1'b0,pre_sum_1[0],w_adder_1[0]);
+  one_bit_adder adder_1_2(a_1[1],b_1[1],w_adder_1[0],pre_sum_1[1],w_adder_1[1]);
+  one_bit_adder adder_1_3(a_1[2],b_1[2],w_adder_1[1],pre_sum_1[2],cout_1);
+  //FIXME ft_fa adder_1_1(a_1[0],b_1[0],1'b0,pre_sum_1[0],w_adder_1[0]);
+  //FIXME ft_fa adder_1_2(a_1[1],b_1[1],w_adder_1[0],pre_sum_1[1],w_adder_1[1]);
+  //FIXME ft_fa adder_1_3(a_1[2],b_1[2],w_adder_1[1],pre_sum_1[2],cout_1);
   
   //Adder1 redundancy 
   wire [2:0] a_1_r; 
@@ -107,6 +107,9 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   assign a_1_r[2:0] = post_a[2:0]; 
   assign b_1_r[2:0] = post_b[2:0]; 
   
+  //FIXME ft_fa adder_1_1_r(a_1_r[0],b_1_r[0],1'b0,pre_sum_1_r[0],w_adder_1_r[0]);
+  //FIXME ft_fa adder_1_2_r(a_1_r[1],b_1_r[1],w_adder_1_r[0],pre_sum_1_r[1],w_adder_1_r[1]);
+  //FIXME ft_fa adder_1_3_r(a_1_r[2],b_1_r[2],w_adder_1_r[1],pre_sum_1_r[2],cout_1_r);
   one_bit_adder adder_1_1_r(a_1_r[0],b_1_r[0],1'b0,pre_sum_1_r[0],w_adder_1_r[0]);
   one_bit_adder adder_1_2_r(a_1_r[1],b_1_r[1],w_adder_1_r[0],pre_sum_1_r[1],w_adder_1_r[1]);
   one_bit_adder adder_1_3_r(a_1_r[2],b_1_r[2],w_adder_1_r[1],pre_sum_1_r[2],cout_1_r);
@@ -114,13 +117,13 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   //Correct error using hamming code
   wire [2:0]post_sum_1;
   wire [2:0]post_sum_1_r;
-  wire [2:0]hm_code_carry;
-  wire [2:0]hm_code_carry_r;
+  wire [2:0]hm_code_carry_1;
+  wire [2:0]hm_code_carry_1_r;
 
-  hm_encode hm_encode_1_carry({w_adder_1[1],w_adder_1[0],1'b0},hm_code_carry);
-  hm_encode hm_encode_1_carry_r({w_adder_1_r[1],w_adder_1_r[0],1'b0},hm_code_carry_r);
-  hm_err_cor hm_err_cor_1(pre_sum_1,hm_code_a,hm_code_b,hm_code_carry,post_sum_1);
-  hm_err_cor hm_err_cor_1_r(pre_sum_1_r,hm_code_a_r,hm_code_b_r,hm_code_carry_r,post_sum_1_r);
+  hm_encode hm_encode_1_carry({w_adder_1[1],w_adder_1[0],1'b0},hm_code_carry_1);
+  hm_encode hm_encode_1_carry_r({w_adder_1_r[1],w_adder_1_r[0],1'b0},hm_code_carry_1_r);
+  hm_err_cor hm_err_cor_1(pre_sum_1,hm_code_a,hm_code_b,hm_code_carry_1,post_sum_1);
+  hm_err_cor hm_err_cor_1_r(pre_sum_1_r,hm_code_a_r,hm_code_b_r,hm_code_carry_1_r,post_sum_1_r);
 
   //assign value
   assign X0 = post_sum_1[0];
@@ -148,9 +151,6 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   one_bit_adder
   adder_2_3(a_2[2],b_2[2],w_adder_2[1],pre_sum_2[2],cout_2);
   
-  assign Y0 = pre_sum_2[0];
-  assign Y1 = pre_sum_2[1];
-  assign Y2 = pre_sum_2[2];
   
   //Adder2 redundancy 
   wire [2:0] a_2_r; 
@@ -165,6 +165,26 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   one_bit_adder adder_2_1_r(a_2_r[0],b_2_r[0],1'b0,pre_sum_2_r[0],w_adder_2_r[0]);
   one_bit_adder adder_2_2_r(a_2_r[1],b_2_r[1],w_adder_2_r[0],pre_sum_2_r[1],w_adder_2_r[1]);
   one_bit_adder adder_2_3_r(a_2_r[2],b_2_r[2],w_adder_2_r[1],pre_sum_2_r[2],cout_2_r);
+
+  //Correct error using hamming code
+  wire [2:0]post_sum_2;
+  wire [2:0]post_sum_2_r;
+  wire [2:0]hm_code_carry_2;
+  wire [2:0]hm_code_carry_2_r;
+
+  //assign value
+  //assign Y0 = pre_sum_2[0];
+  //assign Y1 = pre_sum_2[1];
+  //assign Y2 = pre_sum_2[2];
+  assign Y0 = post_sum_2[0];
+  assign Y1 = post_sum_2[1];
+  assign Y2 = post_sum_2[2];
+
+  hm_encode hm_encode_2_carry({w_adder_2[1],w_adder_2[0],1'b0},hm_code_carry_2);
+  hm_encode hm_encode_2_carry_r({w_adder_2_r[1],w_adder_2_r[0],1'b0},hm_code_carry_2_r);
+  hm_err_cor hm_err_cor_2(pre_sum_2,hm_code_a,hm_code_b,hm_code_carry_2,post_sum_2);
+  hm_err_cor hm_err_cor_2_r(pre_sum_2_r,hm_code_a_r,hm_code_b_r,hm_code_carry_2_r,post_sum_2_r);
+
 
   //Error logic
   wire  pre_x0_e;
@@ -189,11 +209,15 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   assign pre_x1_e = !((post_sum_1[2]^post_sum_1_r[2]) | (cout_1^cout_1_r));
   assign pre_x1_e_r = !((post_sum_1[2]^post_sum_1_r[2]) | (cout_1^cout_1_r));
   
-  assign pre_y0_e = (pre_sum_2[0]^pre_sum_2_r[0]) | (pre_sum_2[1]^pre_sum_2_r[1]);
-  assign pre_y0_e_r= (pre_sum_2[0]^pre_sum_2_r[0]) | (pre_sum_2[1]^pre_sum_2_r[1]);
-  assign pre_y1_e = !((pre_sum_2[2]^pre_sum_2_r[2]) | (cout_2^cout_2_r));
-  assign pre_y1_e_r = !((pre_sum_2[2]^pre_sum_2_r[2]) | (cout_2^cout_2_r));
+  //FIXME assign pre_y0_e = (pre_sum_2[0]^pre_sum_2_r[0]) | (pre_sum_2[1]^pre_sum_2_r[1]);
+  //FIXME assign pre_y0_e_r= (pre_sum_2[0]^pre_sum_2_r[0]) | (pre_sum_2[1]^pre_sum_2_r[1]);
+  //FIXME assign pre_y1_e = !((pre_sum_2[2]^pre_sum_2_r[2]) | (cout_2^cout_2_r));
+  //FIXME assign pre_y1_e_r = !((pre_sum_2[2]^pre_sum_2_r[2]) | (cout_2^cout_2_r));
 
+  assign pre_y0_e = (post_sum_2[0]^post_sum_2_r[0]) | (post_sum_2[1]^post_sum_2_r[1]);
+  assign pre_y0_e_r= (post_sum_2[0]^post_sum_2_r[0]) | (post_sum_2[1]^post_sum_2_r[1]);
+  assign pre_y1_e = !((post_sum_2[2]^post_sum_2_r[2]) | (cout_2^cout_2_r));
+  assign pre_y1_e_r = !((post_sum_2[2]^post_sum_2_r[2]) | (cout_2^cout_2_r));
   //Combine all error signal 
   wire [2:0]xe_0;
   wire [2:0]xe_1;
@@ -280,6 +304,35 @@ endmodule
   assign c1 = (a0&b0)|(b0&c0)|(c0&a0);
   
   endmodule
+
+  module ft_fa(a0,b0,c0,sum,cout);
+  input a0,b0,c0;
+  output sum,cout;
+  
+  wire sum_act,cout_act;
+  one_bit_adder adder(a0,b0,c0,sum_act,cout_act);
+
+  wire g3,g2,g1;
+  wire s1,c1;
+  wire fs,fc;
+  wire fu;
+  
+  assign g3 = a0&b0&c0;
+  assign g2 = b0&c0;
+  assign g1 = b0|c0;
+  
+  assign fu = ((!a0)&(!b0)&(!c0)) | (a0&b0&c0);
+  assign c1 = a0?g1:g2;
+  assign s1 = fu?g3:(!c1);
+  
+  assign fs  = s1^sum_act;
+  assign fc  = c1^cout_act;
+  
+  assign sum = fs?(!s1):s1;
+  assign cout= fc?(!c1):c1;
+
+  endmodule
+
 
   module codeword_check(a0,a1,a2,b0,b1,b2,par,er);
     input a0,a1,a2,b0,b1,b2,par;
@@ -375,3 +428,4 @@ endmodule
 //assign par_act = message[2]^message[1]^message[0]^p1_act^p2_act^p2_act;
 ////assign er = (p1_e | p2_e | p3_e)&
 //endmodule
+
