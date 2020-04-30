@@ -85,8 +85,8 @@ module main(A0,A1,A2,B0,B1,B2,PAR,C0,C1,C2,X0,X1,X2,XC,XE0,XE1,
   hm_encode hm_encode_1_a(post_a,hm_code_a);
   hm_encode hm_encode_1_b(post_b,hm_code_b);
 
-  hm_encode hm_encode_1_a_r(post_a_r,hm_code_a_r);
-  hm_encode hm_encode_1_b_r(post_b_r,hm_code_b_r);
+  hm_encode hm_encode_1_a_r(post_a,hm_code_a_r);
+  hm_encode hm_encode_1_b_r(post_b,hm_code_b_r);
 
 
   //Adder1
