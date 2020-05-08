@@ -1,0 +1,1286 @@
+.model main
+.inputs B00 B10 B20 C00 C10 C20 A00 A10 A20 PAR0 
+.outputs XE10 Y00 Y10 Y20 XC0 X00 YE00 X10 YE10 X20 YC0 XE00 
+.subckt trc y00=pre_x0_e0 y10=pre_x1_e_r0 x00=pre_x0_e0 x10=pre_x1_e_r0 output20=xe_1<1>0 output10=xe_0<1>0 
+.subckt one_bit_adder a00=a_2<0>0 c00=_n9c0 b00=b_2<0>0 c10=w_adder_2<0>0 s00=pre_sum_2<0>0 
+.subckt hm_encode message<0>0=post_a<0>0 message<1>0=post_a<1>0 message<2>0=post_a<2>0 code<0>0=hm_code_a_r<0>0 code<1>0=hm_code_a_r<1>0 code<2>0=hm_code_a_r<2>0 
+.subckt hm_encode message<0>0=post_a<0>0 message<1>0=post_a<1>0 message<2>0=post_a<2>0 code<0>0=hm_code_a<0>0 code<1>0=hm_code_a<1>0 code<2>0=hm_code_a<2>0 
+.subckt control_check c00=C00 c10=C10 c20=C20 er_bar0=ci_e_tmr_bar<0>0 er0=ci_e_tmr<0>0 
+.subckt trc y00=pre_x0_e0 y10=pre_x1_e_r0 x00=pre_x0_e0 x10=pre_x1_e_r0 output20=xe_1<2>0 output10=xe_0<2>0 
+.subckt one_bit_adder a00=a_2<1>0 c00=w_adder_2<0>0 b00=b_2<1>0 c10=w_adder_2<1>0 s00=pre_sum_2<1>0 
+.subckt control_check c00=C00 c10=C10 c20=C20 er_bar0=ci_e_tmr_bar<1>0 er0=ci_e_tmr<1>0 
+.subckt one_bit_adder a00=a_2<2>0 c00=w_adder_2<1>0 b00=b_2<2>0 c10=cout_20 s00=pre_sum_2<2>0 
+.subckt tmr_voter c0=ci_e_tmr_bar<2>0 a0=ci_e_tmr_bar<0>0 b0=ci_e_tmr_bar<1>0 v0=ci_e_bar0 
+.subckt control_check c00=C00 c10=C10 c20=C20 er_bar0=ci_e_tmr_bar<2>0 er0=ci_e_tmr<2>0 
+.subckt codeword_check par0=PAR0 a00=A00 a10=A10 a20=A20 b00=B00 b10=B10 b20=B20 er_bar0=cw_e_tmr_bar<2>0 er0=cw_e_tmr<2>0 
+.subckt trc y00=cw_ctl_e0 y10=cw_ctl_e_bar0 x00=xe_0<3>0 x10=xe_1<3>0 output20=XE10 output10=XE00 
+.subckt tmr_voter c0=xe_0<2>0 a0=xe_0<0>0 b0=xe_0<1>0 v0=xe_0<3>0 
+.subckt one_bit_adder a00=a_1_r<2>0 c00=w_adder_1_r<1>0 b00=b_1_r<2>0 c10=cout_1_r0 s00=pre_sum_1_r<2>0 
+.subckt tmr_voter_3bit c<0>0=post_a_r1<0>0 c<1>0=post_a_r1<1>0 c<2>0=post_a_r1<2>0 a<0>0=post_a_r2<0>0 a<1>0=post_a_r2<1>0 a<2>0=post_a_r2<2>0 b<0>0=post_a_r<0>0 b<1>0=post_a_r<1>0 b<2>0=post_a_r<2>0 v<0>0=post_a<0>0 v<1>0=post_a<1>0 v<2>0=post_a<2>0 
+.subckt tmr_voter c0=ci_e_tmr<2>0 a0=ci_e_tmr<0>0 b0=ci_e_tmr<1>0 v0=ci_e0 
+.subckt codeword_check par0=PAR0 a00=A00 a10=A10 a20=A20 b00=B00 b10=B10 b20=B20 er_bar0=cw_e_tmr_bar<1>0 er0=cw_e_tmr<1>0 
+.subckt trc y00=cw_ctl_e0 y10=cw_ctl_e_bar0 x00=ye_0<3>0 x10=ye_1<3>0 output20=YE10 output10=YE00 
+.subckt tmr_voter c0=xe_1<2>0 a0=xe_1<0>0 b0=xe_1<1>0 v0=xe_1<3>0 
+.subckt one_bit_adder a00=a_2_r<0>0 c00=_n9f0 b00=b_2_r<0>0 c10=w_adder_2_r<0>0 s00=pre_sum_2_r<0>0 
+.subckt hm_err_cor carry_p<0>0=hm_code_carry_1_r<0>0 carry_p<1>0=hm_code_carry_1_r<1>0 carry_p<2>0=hm_code_carry_1_r<2>0 b_p<0>0=hm_code_b_r<0>0 b_p<1>0=hm_code_b_r<1>0 b_p<2>0=hm_code_b_r<2>0 a_p<0>0=hm_code_a_r<0>0 a_p<1>0=hm_code_a_r<1>0 a_p<2>0=hm_code_a_r<2>0 message<0>0=pre_sum_1_r<0>0 message<1>0=pre_sum_1_r<1>0 message<2>0=pre_sum_1_r<2>0 r_message<0>0=post_sum_1_r<0>0 r_message<1>0=post_sum_1_r<1>0 r_message<2>0=post_sum_1_r<2>0 
+.subckt one_bit_adder a00=a_1_r<0>0 c00=_n8f0 b00=b_1_r<0>0 c10=w_adder_1_r<0>0 s00=pre_sum_1_r<0>0 
+.subckt tmr_voter_3bit c<0>0=post_b_r1<0>0 c<1>0=post_b_r1<1>0 c<2>0=post_b_r1<2>0 a<0>0=post_b_r2<0>0 a<1>0=post_b_r2<1>0 a<2>0=post_b_r2<2>0 b<0>0=post_b_r<0>0 b<1>0=post_b_r<1>0 b<2>0=post_b_r<2>0 v<0>0=post_b<0>0 v<1>0=post_b<1>0 v<2>0=post_b<2>0 
+.subckt codeword_check par0=PAR0 a00=A00 a10=A10 a20=A20 b00=B00 b10=B10 b20=B20 er_bar0=cw_e_tmr_bar<0>0 er0=cw_e_tmr<0>0 
+.subckt hm_encode message<0>0=_na7<0>0 message<1>0=_na7<1>0 message<2>0=_na7<2>0 code<0>0=hm_code_carry_2_r<0>0 code<1>0=hm_code_carry_2_r<1>0 code<2>0=hm_code_carry_2_r<2>0 
+.subckt one_bit_adder a00=a_2_r<2>0 c00=w_adder_2_r<1>0 b00=b_2_r<2>0 c10=cout_2_r0 s00=pre_sum_2_r<2>0 
+.subckt hm_encode message<0>0=post_b<0>0 message<1>0=post_b<1>0 message<2>0=post_b<2>0 code<0>0=hm_code_b_r<0>0 code<1>0=hm_code_b_r<1>0 code<2>0=hm_code_b_r<2>0 
+.subckt trc y00=pre_y0_e0 y10=pre_y1_e_r0 x00=pre_y0_e0 x10=pre_y1_e_r0 output20=ye_1<0>0 output10=ye_0<0>0 
+.subckt hm_encode message<0>0=_n90<0>0 message<1>0=_n90<1>0 message<2>0=_n90<2>0 code<0>0=hm_code_carry_1<0>0 code<1>0=hm_code_carry_1<1>0 code<2>0=hm_code_carry_1<2>0 
+.subckt one_bit_adder a00=a_1<0>0 c00=_n8c0 b00=b_1<0>0 c10=w_adder_1<0>0 s00=pre_sum_1<0>0 
+.subckt trc y00=pre_y0_e0 y10=pre_y1_e_r0 x00=pre_y0_e0 x10=pre_y1_e_r0 output20=ye_1<1>0 output10=ye_0<1>0 
+.subckt trc y00=ci_e0 y10=ci_e_bar0 x00=cw_e_bar0 x10=cw_e0 output20=cw_ctl_e_bar0 output10=cw_ctl_e0 
+.subckt hm_err_cor carry_p<0>0=hm_code_carry_2<0>0 carry_p<1>0=hm_code_carry_2<1>0 carry_p<2>0=hm_code_carry_2<2>0 b_p<0>0=hm_code_b<0>0 b_p<1>0=hm_code_b<1>0 b_p<2>0=hm_code_b<2>0 a_p<0>0=hm_code_a<0>0 a_p<1>0=hm_code_a<1>0 a_p<2>0=hm_code_a<2>0 message<0>0=pre_sum_2<0>0 message<1>0=pre_sum_2<1>0 message<2>0=pre_sum_2<2>0 r_message<0>0=post_sum_2<0>0 r_message<1>0=post_sum_2<1>0 r_message<2>0=post_sum_2<2>0 
+.subckt one_bit_adder a00=a_1<1>0 c00=w_adder_1<0>0 b00=b_1<1>0 c10=w_adder_1<1>0 s00=pre_sum_1<1>0 
+.subckt trc y00=pre_y0_e0 y10=pre_y1_e_r0 x00=pre_y0_e0 x10=pre_y1_e_r0 output20=ye_1<2>0 output10=ye_0<2>0 
+.subckt hm_encode message<0>0=_na4<0>0 message<1>0=_na4<1>0 message<2>0=_na4<2>0 code<0>0=hm_code_carry_2<0>0 code<1>0=hm_code_carry_2<1>0 code<2>0=hm_code_carry_2<2>0 
+.subckt hm_err_cor carry_p<0>0=hm_code_carry_1<0>0 carry_p<1>0=hm_code_carry_1<1>0 carry_p<2>0=hm_code_carry_1<2>0 b_p<0>0=hm_code_b<0>0 b_p<1>0=hm_code_b<1>0 b_p<2>0=hm_code_b<2>0 a_p<0>0=hm_code_a<0>0 a_p<1>0=hm_code_a<1>0 a_p<2>0=hm_code_a<2>0 message<0>0=pre_sum_1<0>0 message<1>0=pre_sum_1<1>0 message<2>0=pre_sum_1<2>0 r_message<0>0=post_sum_1<0>0 r_message<1>0=post_sum_1<1>0 r_message<2>0=post_sum_1<2>0 
+.subckt hm_encode message<0>0=_n93<0>0 message<1>0=_n93<1>0 message<2>0=_n93<2>0 code<0>0=hm_code_carry_1_r<0>0 code<1>0=hm_code_carry_1_r<1>0 code<2>0=hm_code_carry_1_r<2>0 
+.subckt one_bit_adder a00=a_1<2>0 c00=w_adder_1<1>0 b00=b_1<2>0 c10=cout_10 s00=pre_sum_1<2>0 
+.subckt tmr_voter_3bit c<0>0=comp_a_r_3<0>0 c<1>0=comp_a_r_3<1>0 c<2>0=comp_a_r_3<2>0 a<0>0=comp_a_r_1<0>0 a<1>0=comp_a_r_1<1>0 a<2>0=comp_a_r_1<2>0 b<0>0=comp_a_r_2<0>0 b<1>0=comp_a_r_2<1>0 b<2>0=comp_a_r_2<2>0 v<0>0=comp_a<0>0 v<1>0=comp_a<1>0 v<2>0=comp_a<2>0 
+.subckt tmr_voter c0=ye_1<2>0 a0=ye_1<0>0 b0=ye_1<1>0 v0=ye_1<3>0 
+.subckt hm_err_cor carry_p<0>0=hm_code_carry_2_r<0>0 carry_p<1>0=hm_code_carry_2_r<1>0 carry_p<2>0=hm_code_carry_2_r<2>0 b_p<0>0=hm_code_b_r<0>0 b_p<1>0=hm_code_b_r<1>0 b_p<2>0=hm_code_b_r<2>0 a_p<0>0=hm_code_a_r<0>0 a_p<1>0=hm_code_a_r<1>0 a_p<2>0=hm_code_a_r<2>0 message<0>0=pre_sum_2_r<0>0 message<1>0=pre_sum_2_r<1>0 message<2>0=pre_sum_2_r<2>0 r_message<0>0=post_sum_2_r<0>0 r_message<1>0=post_sum_2_r<1>0 r_message<2>0=post_sum_2_r<2>0 
+.subckt one_bit_adder a00=a_1_r<1>0 c00=w_adder_1_r<0>0 b00=b_1_r<1>0 c10=w_adder_1_r<1>0 s00=pre_sum_1_r<1>0 
+.subckt tmr_voter_3bit c<0>0=comp_b_r_3<0>0 c<1>0=comp_b_r_3<1>0 c<2>0=comp_b_r_3<2>0 a<0>0=comp_b_r_1<0>0 a<1>0=comp_b_r_1<1>0 a<2>0=comp_b_r_1<2>0 b<0>0=comp_b_r_2<0>0 b<1>0=comp_b_r_2<1>0 b<2>0=comp_b_r_2<2>0 v<0>0=comp_b<0>0 v<1>0=comp_b<1>0 v<2>0=comp_b<2>0 
+.subckt tmr_voter c0=cw_e_tmr_bar<2>0 a0=cw_e_tmr_bar<0>0 b0=cw_e_tmr_bar<1>0 v0=cw_e_bar0 
+.subckt tmr_voter c0=ye_0<2>0 a0=ye_0<0>0 b0=ye_0<1>0 v0=ye_0<3>0 
+.subckt trc y00=pre_x0_e0 y10=pre_x1_e_r0 x00=pre_x0_e0 x10=pre_x1_e_r0 output20=xe_1<0>0 output10=xe_0<0>0 
+.subckt one_bit_adder a00=a_2_r<1>0 c00=w_adder_2_r<0>0 b00=b_2_r<1>0 c10=w_adder_2_r<1>0 s00=pre_sum_2_r<1>0 
+.subckt hm_encode message<0>0=post_b<0>0 message<1>0=post_b<1>0 message<2>0=post_b<2>0 code<0>0=hm_code_b<0>0 code<1>0=hm_code_b<1>0 code<2>0=hm_code_b<2>0 
+.subckt tmr_voter c0=cw_e_tmr<2>0 a0=cw_e_tmr<0>0 b0=cw_e_tmr<1>0 v0=cw_e0 
+.names A00 _n20 
+0 1
+.names _n20 _n1<0>0 
+1 1
+.names _n30
+0
+.names A10 _n40 
+0 1
+.names _n40 _n1<1>0 
+1 1
+.names _n50
+0
+.names A20 _n60 
+0 1
+.names _n60 _n1<2>0 
+1 1
+.names _n70
+0
+.names _n8<0>0
+1
+.names _n8<1>0
+0
+.names _n8<2>0
+0
+.names _na0
+0
+.names _n1<0>0 _n8<0>0 _na0 _n9<0>0 
+001 1
+010 1
+100 1
+111 1
+.names _nc0
+0
+.names _n1<0>0 _n8<0>0 _nc0 _nb0 
+011 1
+101 1
+110 1
+111 1
+.names _n1<1>0 _n8<1>0 _nb0 _n9<1>0 
+001 1
+010 1
+100 1
+111 1
+.names _n1<1>0 _n8<1>0 _nb0 _nd0 
+011 1
+101 1
+110 1
+111 1
+.names _n1<2>0 _n8<2>0 _nd0 _n9<2>0 
+001 1
+010 1
+100 1
+111 1
+.names _n9<0>0 comp_a_r_1$raw_n0<0>0 
+1 1
+.names _n9<1>0 comp_a_r_1$raw_n0<1>0 
+1 1
+.names _n9<2>0 comp_a_r_1$raw_n0<2>0 
+1 1
+.names A00 _n100 
+0 1
+.names _n100 _nf<0>0 
+1 1
+.names _n110
+0
+.names A10 _n120 
+0 1
+.names _n120 _nf<1>0 
+1 1
+.names _n130
+0
+.names A20 _n140 
+0 1
+.names _n140 _nf<2>0 
+1 1
+.names _n150
+0
+.names _n16<0>0
+1
+.names _n16<1>0
+0
+.names _n16<2>0
+0
+.names _n180
+0
+.names _nf<0>0 _n16<0>0 _n180 _n17<0>0 
+001 1
+010 1
+100 1
+111 1
+.names _n1a0
+0
+.names _nf<0>0 _n16<0>0 _n1a0 _n190 
+011 1
+101 1
+110 1
+111 1
+.names _nf<1>0 _n16<1>0 _n190 _n17<1>0 
+001 1
+010 1
+100 1
+111 1
+.names _nf<1>0 _n16<1>0 _n190 _n1b0 
+011 1
+101 1
+110 1
+111 1
+.names _nf<2>0 _n16<2>0 _n1b0 _n17<2>0 
+001 1
+010 1
+100 1
+111 1
+.names _n17<0>0 comp_a_r_2$raw_ne<0>0 
+1 1
+.names _n17<1>0 comp_a_r_2$raw_ne<1>0 
+1 1
+.names _n17<2>0 comp_a_r_2$raw_ne<2>0 
+1 1
+.names A00 _n1e0 
+0 1
+.names _n1e0 _n1d<0>0 
+1 1
+.names _n1f0
+0
+.names A10 _n200 
+0 1
+.names _n200 _n1d<1>0 
+1 1
+.names _n210
+0
+.names A20 _n220 
+0 1
+.names _n220 _n1d<2>0 
+1 1
+.names _n230
+0
+.names _n24<0>0
+1
+.names _n24<1>0
+0
+.names _n24<2>0
+0
+.names _n260
+0
+.names _n1d<0>0 _n24<0>0 _n260 _n25<0>0 
+001 1
+010 1
+100 1
+111 1
+.names _n280
+0
+.names _n1d<0>0 _n24<0>0 _n280 _n270 
+011 1
+101 1
+110 1
+111 1
+.names _n1d<1>0 _n24<1>0 _n270 _n25<1>0 
+001 1
+010 1
+100 1
+111 1
+.names _n1d<1>0 _n24<1>0 _n270 _n290 
+011 1
+101 1
+110 1
+111 1
+.names _n1d<2>0 _n24<2>0 _n290 _n25<2>0 
+001 1
+010 1
+100 1
+111 1
+.names _n25<0>0 comp_a_r_3$raw_n1c<0>0 
+1 1
+.names _n25<1>0 comp_a_r_3$raw_n1c<1>0 
+1 1
+.names _n25<2>0 comp_a_r_3$raw_n1c<2>0 
+1 1
+.names B00 _n2c0 
+0 1
+.names _n2c0 _n2b<0>0 
+1 1
+.names _n2d0
+0
+.names B10 _n2e0 
+0 1
+.names _n2e0 _n2b<1>0 
+1 1
+.names _n2f0
+0
+.names B20 _n300 
+0 1
+.names _n300 _n2b<2>0 
+1 1
+.names _n310
+0
+.names _n32<0>0
+1
+.names _n32<1>0
+0
+.names _n32<2>0
+0
+.names _n340
+0
+.names _n2b<0>0 _n32<0>0 _n340 _n33<0>0 
+001 1
+010 1
+100 1
+111 1
+.names _n360
+0
+.names _n2b<0>0 _n32<0>0 _n360 _n350 
+011 1
+101 1
+110 1
+111 1
+.names _n2b<1>0 _n32<1>0 _n350 _n33<1>0 
+001 1
+010 1
+100 1
+111 1
+.names _n2b<1>0 _n32<1>0 _n350 _n370 
+011 1
+101 1
+110 1
+111 1
+.names _n2b<2>0 _n32<2>0 _n370 _n33<2>0 
+001 1
+010 1
+100 1
+111 1
+.names _n33<0>0 comp_b_r_1$raw_n2a<0>0 
+1 1
+.names _n33<1>0 comp_b_r_1$raw_n2a<1>0 
+1 1
+.names _n33<2>0 comp_b_r_1$raw_n2a<2>0 
+1 1
+.names B00 _n3a0 
+0 1
+.names _n3a0 _n39<0>0 
+1 1
+.names _n3b0
+0
+.names B10 _n3c0 
+0 1
+.names _n3c0 _n39<1>0 
+1 1
+.names _n3d0
+0
+.names B20 _n3e0 
+0 1
+.names _n3e0 _n39<2>0 
+1 1
+.names _n3f0
+0
+.names _n40<0>0
+1
+.names _n40<1>0
+0
+.names _n40<2>0
+0
+.names _n420
+0
+.names _n39<0>0 _n40<0>0 _n420 _n41<0>0 
+001 1
+010 1
+100 1
+111 1
+.names _n440
+0
+.names _n39<0>0 _n40<0>0 _n440 _n430 
+011 1
+101 1
+110 1
+111 1
+.names _n39<1>0 _n40<1>0 _n430 _n41<1>0 
+001 1
+010 1
+100 1
+111 1
+.names _n39<1>0 _n40<1>0 _n430 _n450 
+011 1
+101 1
+110 1
+111 1
+.names _n39<2>0 _n40<2>0 _n450 _n41<2>0 
+001 1
+010 1
+100 1
+111 1
+.names _n41<0>0 comp_b_r_2$raw_n38<0>0 
+1 1
+.names _n41<1>0 comp_b_r_2$raw_n38<1>0 
+1 1
+.names _n41<2>0 comp_b_r_2$raw_n38<2>0 
+1 1
+.names B00 _n480 
+0 1
+.names _n480 _n47<0>0 
+1 1
+.names _n490
+0
+.names B10 _n4a0 
+0 1
+.names _n4a0 _n47<1>0 
+1 1
+.names _n4b0
+0
+.names B20 _n4c0 
+0 1
+.names _n4c0 _n47<2>0 
+1 1
+.names _n4d0
+0
+.names _n4e<0>0
+1
+.names _n4e<1>0
+0
+.names _n4e<2>0
+0
+.names _n500
+0
+.names _n47<0>0 _n4e<0>0 _n500 _n4f<0>0 
+001 1
+010 1
+100 1
+111 1
+.names _n520
+0
+.names _n47<0>0 _n4e<0>0 _n520 _n510 
+011 1
+101 1
+110 1
+111 1
+.names _n47<1>0 _n4e<1>0 _n510 _n4f<1>0 
+001 1
+010 1
+100 1
+111 1
+.names _n47<1>0 _n4e<1>0 _n510 _n530 
+011 1
+101 1
+110 1
+111 1
+.names _n47<2>0 _n4e<2>0 _n530 _n4f<2>0 
+001 1
+010 1
+100 1
+111 1
+.names _n4f<0>0 comp_b_r_3$raw_n46<0>0 
+1 1
+.names _n4f<1>0 comp_b_r_3$raw_n46<1>0 
+1 1
+.names _n4f<2>0 comp_b_r_3$raw_n46<2>0 
+1 1
+.names A00 _n55<0>0 
+1 1
+.names _n560
+0
+.names A10 _n55<1>0 
+1 1
+.names _n570
+0
+.names A20 _n55<2>0 
+1 1
+.names _n580
+0
+.names comp_a<0>0 _n55<0>0 C20 _n59<0>0 
+1-1 1
+-10 1
+.names comp_a<1>0 _n55<1>0 C20 _n59<1>0 
+1-1 1
+-10 1
+.names comp_a<2>0 _n55<2>0 C20 _n59<2>0 
+1-1 1
+-10 1
+.names _n59<0>0 post_a_r$raw_n54<0>0 
+1 1
+.names _n59<1>0 post_a_r$raw_n54<1>0 
+1 1
+.names _n59<2>0 post_a_r$raw_n54<2>0 
+1 1
+.names A00 _n5e<0>0 
+1 1
+.names _n5f0
+0
+.names A10 _n5e<1>0 
+1 1
+.names _n600
+0
+.names A20 _n5e<2>0 
+1 1
+.names _n610
+0
+.names comp_a<0>0 _n5e<0>0 C20 _n62<0>0 
+1-1 1
+-10 1
+.names comp_a<1>0 _n5e<1>0 C20 _n62<1>0 
+1-1 1
+-10 1
+.names comp_a<2>0 _n5e<2>0 C20 _n62<2>0 
+1-1 1
+-10 1
+.names _n62<0>0 post_a_r1$raw_n5d<0>0 
+1 1
+.names _n62<1>0 post_a_r1$raw_n5d<1>0 
+1 1
+.names _n62<2>0 post_a_r1$raw_n5d<2>0 
+1 1
+.names A00 _n67<0>0 
+1 1
+.names _n680
+0
+.names A10 _n67<1>0 
+1 1
+.names _n690
+0
+.names A20 _n67<2>0 
+1 1
+.names _n6a0
+0
+.names comp_a<0>0 _n67<0>0 C20 _n6b<0>0 
+1-1 1
+-10 1
+.names comp_a<1>0 _n67<1>0 C20 _n6b<1>0 
+1-1 1
+-10 1
+.names comp_a<2>0 _n67<2>0 C20 _n6b<2>0 
+1-1 1
+-10 1
+.names _n6b<0>0 post_a_r2$raw_n66<0>0 
+1 1
+.names _n6b<1>0 post_a_r2$raw_n66<1>0 
+1 1
+.names _n6b<2>0 post_a_r2$raw_n66<2>0 
+1 1
+.names B00 _n70<0>0 
+1 1
+.names _n710
+0
+.names B10 _n70<1>0 
+1 1
+.names _n720
+0
+.names B20 _n70<2>0 
+1 1
+.names _n730
+0
+.names comp_b<0>0 _n70<0>0 C10 _n74<0>0 
+1-1 1
+-10 1
+.names comp_b<1>0 _n70<1>0 C10 _n74<1>0 
+1-1 1
+-10 1
+.names comp_b<2>0 _n70<2>0 C10 _n74<2>0 
+1-1 1
+-10 1
+.names _n74<0>0 post_b_r$raw_n6f<0>0 
+1 1
+.names _n74<1>0 post_b_r$raw_n6f<1>0 
+1 1
+.names _n74<2>0 post_b_r$raw_n6f<2>0 
+1 1
+.names B00 _n79<0>0 
+1 1
+.names _n7a0
+0
+.names B10 _n79<1>0 
+1 1
+.names _n7b0
+0
+.names B20 _n79<2>0 
+1 1
+.names _n7c0
+0
+.names comp_b<0>0 _n79<0>0 C10 _n7d<0>0 
+1-1 1
+-10 1
+.names comp_b<1>0 _n79<1>0 C10 _n7d<1>0 
+1-1 1
+-10 1
+.names comp_b<2>0 _n79<2>0 C10 _n7d<2>0 
+1-1 1
+-10 1
+.names _n7d<0>0 post_b_r1$raw_n78<0>0 
+1 1
+.names _n7d<1>0 post_b_r1$raw_n78<1>0 
+1 1
+.names _n7d<2>0 post_b_r1$raw_n78<2>0 
+1 1
+.names B00 _n82<0>0 
+1 1
+.names _n830
+0
+.names B10 _n82<1>0 
+1 1
+.names _n840
+0
+.names B20 _n82<2>0 
+1 1
+.names _n850
+0
+.names comp_b<0>0 _n82<0>0 C10 _n86<0>0 
+1-1 1
+-10 1
+.names comp_b<1>0 _n82<1>0 C10 _n86<1>0 
+1-1 1
+-10 1
+.names comp_b<2>0 _n82<2>0 C10 _n86<2>0 
+1-1 1
+-10 1
+.names _n86<0>0 post_b_r2$raw_n81<0>0 
+1 1
+.names _n86<1>0 post_b_r2$raw_n81<1>0 
+1 1
+.names _n86<2>0 post_b_r2$raw_n81<2>0 
+1 1
+.names post_a<0>0 a_1$raw_n8a<0>0 
+1 1
+.names post_a<1>0 a_1$raw_n8a<1>0 
+1 1
+.names post_a<2>0 a_1$raw_n8a<2>0 
+1 1
+.names post_b<0>0 b_1$raw_n8b<0>0 
+1 1
+.names post_b<1>0 b_1$raw_n8b<1>0 
+1 1
+.names post_b<2>0 b_1$raw_n8b<2>0 
+1 1
+.names _n8c0
+0
+.names post_a<0>0 a_1_r$raw_n8d<0>0 
+1 1
+.names post_a<1>0 a_1_r$raw_n8d<1>0 
+1 1
+.names post_a<2>0 a_1_r$raw_n8d<2>0 
+1 1
+.names post_b<0>0 b_1_r$raw_n8e<0>0 
+1 1
+.names post_b<1>0 b_1_r$raw_n8e<1>0 
+1 1
+.names post_b<2>0 b_1_r$raw_n8e<2>0 
+1 1
+.names _n8f0
+0
+.names _n910
+0
+.names _n910 _n90<0>0 
+1 1
+.names _n920
+0
+.names w_adder_1<0>0 _n90<1>0 
+1 1
+.names w_adder_1<1>0 _n90<2>0 
+1 1
+.names _n940
+0
+.names _n940 _n93<0>0 
+1 1
+.names _n950
+0
+.names w_adder_1_r<0>0 _n93<1>0 
+1 1
+.names w_adder_1_r<1>0 _n93<2>0 
+1 1
+.names post_sum_1<0>0 X0$raw_n960 
+1 1
+.names post_sum_1<1>0 X1$raw_n970 
+1 1
+.names post_sum_1<2>0 X2$raw_n980 
+1 1
+.names cout_10 XC$raw_n990 
+1 1
+.names post_a<0>0 a_2$raw_n9a<0>0 
+1 1
+.names post_a<1>0 a_2$raw_n9a<1>0 
+1 1
+.names post_a<2>0 a_2$raw_n9a<2>0 
+1 1
+.names post_b<0>0 b_2$raw_n9b<0>0 
+1 1
+.names post_b<1>0 b_2$raw_n9b<1>0 
+1 1
+.names post_b<2>0 b_2$raw_n9b<2>0 
+1 1
+.names _n9c0
+0
+.names post_a<0>0 a_2_r$raw_n9d<0>0 
+1 1
+.names post_a<1>0 a_2_r$raw_n9d<1>0 
+1 1
+.names post_a<2>0 a_2_r$raw_n9d<2>0 
+1 1
+.names post_b<0>0 b_2_r$raw_n9e<0>0 
+1 1
+.names post_b<1>0 b_2_r$raw_n9e<1>0 
+1 1
+.names post_b<2>0 b_2_r$raw_n9e<2>0 
+1 1
+.names _n9f0
+0
+.names post_sum_2<0>0 Y0$raw_na00 
+1 1
+.names post_sum_2<1>0 Y1$raw_na10 
+1 1
+.names post_sum_2<2>0 Y2$raw_na20 
+1 1
+.names cout_20 YC$raw_na30 
+1 1
+.names _na50
+0
+.names _na50 _na4<0>0 
+1 1
+.names _na60
+0
+.names w_adder_2<0>0 _na4<1>0 
+1 1
+.names w_adder_2<1>0 _na4<2>0 
+1 1
+.names _na80
+0
+.names _na80 _na7<0>0 
+1 1
+.names _na90
+0
+.names w_adder_2_r<0>0 _na7<1>0 
+1 1
+.names w_adder_2_r<1>0 _na7<2>0 
+1 1
+.names post_sum_1<0>0 post_sum_1_r<0>0 _nab<0>0 
+01 1
+10 1
+.names post_sum_1<1>0 post_sum_1_r<1>0 _nac<0>0 
+01 1
+10 1
+.names _nad<0>0_b _nad<0>0
+0 1
+.names _nab<0>0 _nac<0>0 _nad<0>0_b 
+00 1
+.names _nad<0>0 pre_x0_e$raw_naa0 
+1 1
+.names post_sum_1<0>0 post_sum_1_r<0>0 _naf<0>0 
+01 1
+10 1
+.names post_sum_1<1>0 post_sum_1_r<1>0 _nb0<0>0 
+01 1
+10 1
+.names _nb1<0>0_b _nb1<0>0
+0 1
+.names _naf<0>0 _nb0<0>0 _nb1<0>0_b 
+00 1
+.names _nb1<0>0 _nb20 
+0 1
+.names _nb20 pre_x0_e_r$raw_nae0 
+1 1
+.names post_sum_1<2>0 post_sum_1_r<2>0 _nb4<0>0 
+01 1
+10 1
+.names cout_10 cout_1_r0 _nb50 
+01 1
+10 1
+.names _nb6<0>0_b _nb6<0>0
+0 1
+.names _nb4<0>0 _nb50 _nb6<0>0_b 
+00 1
+.names _nb6<0>0 pre_x1_e$raw_nb30 
+1 1
+.names post_sum_1<2>0 post_sum_1_r<2>0 _nb8<0>0 
+01 1
+10 1
+.names cout_10 cout_1_r0 _nb90 
+01 1
+10 1
+.names _nba<0>0_b _nba<0>0
+0 1
+.names _nb8<0>0 _nb90 _nba<0>0_b 
+00 1
+.names _nba<0>0 _nbb0 
+0 1
+.names _nbb0 pre_x1_e_r$raw_nb70 
+1 1
+.names post_sum_2<0>0 post_sum_2_r<0>0 _nbd<0>0 
+01 1
+10 1
+.names post_sum_2<1>0 post_sum_2_r<1>0 _nbe<0>0 
+01 1
+10 1
+.names _nbf<0>0_b _nbf<0>0
+0 1
+.names _nbd<0>0 _nbe<0>0 _nbf<0>0_b 
+00 1
+.names _nbf<0>0 pre_y0_e$raw_nbc0 
+1 1
+.names post_sum_2<0>0 post_sum_2_r<0>0 _nc1<0>0 
+01 1
+10 1
+.names post_sum_2<1>0 post_sum_2_r<1>0 _nc2<0>0 
+01 1
+10 1
+.names _nc3<0>0_b _nc3<0>0
+0 1
+.names _nc1<0>0 _nc2<0>0 _nc3<0>0_b 
+00 1
+.names _nc3<0>0 _nc40 
+0 1
+.names _nc40 pre_y0_e_r$raw_nc00 
+1 1
+.names post_sum_2<2>0 post_sum_2_r<2>0 _nc6<0>0 
+01 1
+10 1
+.names cout_20 cout_2_r0 _nc70 
+01 1
+10 1
+.names _nc8<0>0_b _nc8<0>0
+0 1
+.names _nc6<0>0 _nc70 _nc8<0>0_b 
+00 1
+.names _nc8<0>0 pre_y1_e$raw_nc50 
+1 1
+.names post_sum_2<2>0 post_sum_2_r<2>0 _nca<0>0 
+01 1
+10 1
+.names cout_20 cout_2_r0 _ncb0 
+01 1
+10 1
+.names _ncc<0>0_b _ncc<0>0
+0 1
+.names _nca<0>0 _ncb0 _ncc<0>0_b 
+00 1
+.names _ncc<0>0 _ncd0 
+0 1
+.names _ncd0 pre_y1_e_r$raw_nc90 
+1 1
+.names pre_x1_e$raw_nb30 pre_x1_e0 
+1 1
+.names Y0$raw_na00 Y00 
+1 1
+.names Y1$raw_na10 Y10 
+1 1
+.names a_1$raw_n8a<0>0 a_1<0>0 
+1 1
+.names a_1$raw_n8a<1>0 a_1<1>0 
+1 1
+.names a_1$raw_n8a<2>0 a_1<2>0 
+1 1
+.names a_2$raw_n9a<0>0 a_2<0>0 
+1 1
+.names a_2$raw_n9a<1>0 a_2<1>0 
+1 1
+.names a_2$raw_n9a<2>0 a_2<2>0 
+1 1
+.names Y2$raw_na20 Y20 
+1 1
+.names post_a_r1$raw_n5d<0>0 post_a_r1<0>0 
+1 1
+.names post_a_r1$raw_n5d<1>0 post_a_r1<1>0 
+1 1
+.names post_a_r1$raw_n5d<2>0 post_a_r1<2>0 
+1 1
+.names comp_b_r_3$raw_n46<0>0 comp_b_r_3<0>0 
+1 1
+.names comp_b_r_3$raw_n46<1>0 comp_b_r_3<1>0 
+1 1
+.names comp_b_r_3$raw_n46<2>0 comp_b_r_3<2>0 
+1 1
+.names post_a_r2$raw_n66<0>0 post_a_r2<0>0 
+1 1
+.names post_a_r2$raw_n66<1>0 post_a_r2<1>0 
+1 1
+.names post_a_r2$raw_n66<2>0 post_a_r2<2>0 
+1 1
+.names pre_x0_e$raw_naa0 pre_x0_e0 
+1 1
+.names comp_b_r_2$raw_n38<0>0 comp_b_r_2<0>0 
+1 1
+.names comp_b_r_2$raw_n38<1>0 comp_b_r_2<1>0 
+1 1
+.names comp_b_r_2$raw_n38<2>0 comp_b_r_2<2>0 
+1 1
+.names pre_y1_e_r$raw_nc90 pre_y1_e_r0 
+1 1
+.names pre_y1_e$raw_nc50 pre_y1_e0 
+1 1
+.names comp_a_r_3$raw_n1c<0>0 comp_a_r_3<0>0 
+1 1
+.names comp_a_r_3$raw_n1c<1>0 comp_a_r_3<1>0 
+1 1
+.names comp_a_r_3$raw_n1c<2>0 comp_a_r_3<2>0 
+1 1
+.names comp_b_r_1$raw_n2a<0>0 comp_b_r_1<0>0 
+1 1
+.names comp_b_r_1$raw_n2a<1>0 comp_b_r_1<1>0 
+1 1
+.names comp_b_r_1$raw_n2a<2>0 comp_b_r_1<2>0 
+1 1
+.names comp_a_r_2$raw_ne<0>0 comp_a_r_2<0>0 
+1 1
+.names comp_a_r_2$raw_ne<1>0 comp_a_r_2<1>0 
+1 1
+.names comp_a_r_2$raw_ne<2>0 comp_a_r_2<2>0 
+1 1
+.names pre_y0_e_r$raw_nc00 pre_y0_e_r0 
+1 1
+.names comp_a_r_1$raw_n0<0>0 comp_a_r_1<0>0 
+1 1
+.names comp_a_r_1$raw_n0<1>0 comp_a_r_1<1>0 
+1 1
+.names comp_a_r_1$raw_n0<2>0 comp_a_r_1<2>0 
+1 1
+.names pre_x1_e_r$raw_nb70 pre_x1_e_r0 
+1 1
+.names post_b_r1$raw_n78<0>0 post_b_r1<0>0 
+1 1
+.names post_b_r1$raw_n78<1>0 post_b_r1<1>0 
+1 1
+.names post_b_r1$raw_n78<2>0 post_b_r1<2>0 
+1 1
+.names b_1_r$raw_n8e<0>0 b_1_r<0>0 
+1 1
+.names b_1_r$raw_n8e<1>0 b_1_r<1>0 
+1 1
+.names b_1_r$raw_n8e<2>0 b_1_r<2>0 
+1 1
+.names post_b_r$raw_n6f<0>0 post_b_r<0>0 
+1 1
+.names post_b_r$raw_n6f<1>0 post_b_r<1>0 
+1 1
+.names post_b_r$raw_n6f<2>0 post_b_r<2>0 
+1 1
+.names post_b_r2$raw_n81<0>0 post_b_r2<0>0 
+1 1
+.names post_b_r2$raw_n81<1>0 post_b_r2<1>0 
+1 1
+.names post_b_r2$raw_n81<2>0 post_b_r2<2>0 
+1 1
+.names pre_y0_e$raw_nbc0 pre_y0_e0 
+1 1
+.names pre_x0_e_r$raw_nae0 pre_x0_e_r0 
+1 1
+.names a_1_r$raw_n8d<0>0 a_1_r<0>0 
+1 1
+.names a_1_r$raw_n8d<1>0 a_1_r<1>0 
+1 1
+.names a_1_r$raw_n8d<2>0 a_1_r<2>0 
+1 1
+.names XC$raw_n990 XC0 
+1 1
+.names b_2_r$raw_n9e<0>0 b_2_r<0>0 
+1 1
+.names b_2_r$raw_n9e<1>0 b_2_r<1>0 
+1 1
+.names b_2_r$raw_n9e<2>0 b_2_r<2>0 
+1 1
+.names post_a_r$raw_n54<0>0 post_a_r<0>0 
+1 1
+.names post_a_r$raw_n54<1>0 post_a_r<1>0 
+1 1
+.names post_a_r$raw_n54<2>0 post_a_r<2>0 
+1 1
+.names X0$raw_n960 X00 
+1 1
+.names a_2_r$raw_n9d<0>0 a_2_r<0>0 
+1 1
+.names a_2_r$raw_n9d<1>0 a_2_r<1>0 
+1 1
+.names a_2_r$raw_n9d<2>0 a_2_r<2>0 
+1 1
+.names X1$raw_n970 X10 
+1 1
+.names X2$raw_n980 X20 
+1 1
+.names YC$raw_na30 YC0 
+1 1
+.names b_1$raw_n8b<0>0 b_1<0>0 
+1 1
+.names b_1$raw_n8b<1>0 b_1<1>0 
+1 1
+.names b_1$raw_n8b<2>0 b_1<2>0 
+1 1
+.names b_2$raw_n9b<0>0 b_2<0>0 
+1 1
+.names b_2$raw_n9b<1>0 b_2<1>0 
+1 1
+.names b_2$raw_n9b<2>0 b_2<2>0 
+1 1
+.end
+.model control_check
+.inputs c00 c10 c20 
+.outputs er_bar0 er0 
+.names c00 c10 _ne10 
+11 1
+.names _ne10 c20 _ne20 
+11 1
+.names _ne20 w_ci$raw_ne00 
+1 1
+.names c00 c10 _ne40 
+01 1
+10 1
+.names _ne50_b _ne50
+0 1
+.names _ne40 w_ci0 _ne50_b 
+00 1
+.names _ne50 er$raw_ne30 
+1 1
+.names _ne70_b _ne70
+0 1
+.names c20 w_ci0 _ne70_b 
+00 1
+.names _ne70 er_bar$raw_ne60 
+1 1
+.names er_bar$raw_ne60 er_bar0 
+1 1
+.names w_ci$raw_ne00 w_ci0 
+1 1
+.names er$raw_ne30 er0 
+1 1
+.end
+.model hm_encode
+.inputs message<0>0 message<1>0 message<2>0 
+.outputs code<0>0 code<1>0 code<2>0 
+.names message<0>0 message<1>0 _ne9<0>0 
+01 1
+10 1
+.names _ne9<0>0 p1$raw_ne80 
+1 1
+.names message<0>0 message<2>0 _neb<0>0 
+01 1
+10 1
+.names _neb<0>0 p2$raw_nea0 
+1 1
+.names message<1>0 message<2>0 _ned<0>0 
+01 1
+10 1
+.names _ned<0>0 p4$raw_nec0 
+1 1
+.names p10 _nef<0>0 
+1 1
+.names _nf00
+0
+.names p20 _nef<1>0 
+1 1
+.names _nf10
+0
+.names p40 _nef<2>0 
+1 1
+.names _nf20
+0
+.names _nef<0>0 code$raw_nee<0>0 
+1 1
+.names _nef<1>0 code$raw_nee<1>0 
+1 1
+.names _nef<2>0 code$raw_nee<2>0 
+1 1
+.names p4$raw_nec0 p40 
+1 1
+.names code$raw_nee<0>0 code<0>0 
+1 1
+.names code$raw_nee<1>0 code<1>0 
+1 1
+.names code$raw_nee<2>0 code<2>0 
+1 1
+.names p1$raw_ne80 p10 
+1 1
+.names p2$raw_nea0 p20 
+1 1
+.end
+.model one_bit_adder
+.inputs a00 c00 b00 
+.outputs c10 s00 
+.names a00 b00 _nf40 
+01 1
+10 1
+.names _nf40 c00 _nf50 
+01 1
+10 1
+.names _nf50 s0$raw_nf30 
+1 1
+.names a00 b00 _nf70 
+11 1
+.names b00 c00 _nf80 
+11 1
+.names _nf90_b _nf90
+0 1
+.names _nf70 _nf80 _nf90_b 
+00 1
+.names c00 a00 _nfa0 
+11 1
+.names _nfb0_b _nfb0
+0 1
+.names _nf90 _nfa0 _nfb0_b 
+00 1
+.names _nfb0 c1$raw_nf60 
+1 1
+.names c1$raw_nf60 c10 
+1 1
+.names s0$raw_nf30 s00 
+1 1
+.end
+.model trc
+.inputs y00 y10 x00 x10 
+.outputs output20 output10 
+.names x00 y10 _n11b0 
+11 1
+.names _n11b0 w$raw_n11a<0>0 
+1 1
+.names _n11c0
+0
+.names x10 y00 _n11e0 
+11 1
+.names _n11e0 w$raw_n11d<1>0 
+1 1
+.names _n11f0
+0
+.names x00 y00 _n1210 
+11 1
+.names _n1210 w$raw_n120<2>0 
+1 1
+.names _n1220
+0
+.names x10 y10 _n1240 
+11 1
+.names _n1240 w$raw_n123<3>0 
+1 1
+.names _n1250
+0
+.names _n127<0>0_b _n127<0>0
+0 1
+.names w<0>0 w<1>0 _n127<0>0_b 
+00 1
+.names _n127<0>0 output1$raw_n1260 
+1 1
+.names _n129<0>0_b _n129<0>0
+0 1
+.names w<2>0 w<3>0 _n129<0>0_b 
+00 1
+.names _n129<0>0 output2$raw_n1280 
+1 1
+.names output2$raw_n1280 output20 
+1 1
+.names output1$raw_n1260 output10 
+1 1
+.names w$raw_n11a<0>0 w<0>0 
+1 1
+.names w$raw_n11d<1>0 w<1>0 
+1 1
+.names w$raw_n120<2>0 w<2>0 
+1 1
+.names w$raw_n123<3>0 w<3>0 
+1 1
+.end
+.model codeword_check
+.inputs par0 a00 a10 a20 b00 b10 b20 
+.outputs er_bar0 er0 
+.names a10 a20 _ncf0 
+01 1
+10 1
+.names _ncf0 w_cw$raw_nce<0>0 
+1 1
+.names _nd00
+0
+.names a00 w_cw<0>0 _nd2<0>0 
+01 1
+10 1
+.names _nd2<0>0 is_n_cw$raw_nd10 
+1 1
+.names b10 b20 _nd40 
+01 1
+10 1
+.names _nd40 w_cw$raw_nd3<1>0 
+1 1
+.names _nd50
+0
+.names b00 w_cw<1>0 _nd7<1>0 
+01 1
+10 1
+.names _nd7<1>0 is_n_cw_b$raw_nd60 
+1 1
+.names is_n_cw0 par0 _nd90 
+01 1
+10 1
+.names _nd90 er$raw_nd80 
+1 1
+.names is_n_cw_b0 er_bar$raw_nda0 
+1 1
+.names er_bar$raw_nda0 er_bar0 
+1 1
+.names is_n_cw_b$raw_nd60 is_n_cw_b0 
+1 1
+.names is_n_cw$raw_nd10 is_n_cw0 
+1 1
+.names er$raw_nd80 er0 
+1 1
+.names w_cw$raw_nce<0>0 w_cw<0>0 
+1 1
+.names w_cw$raw_nd3<1>0 w_cw<1>0 
+1 1
+.end
+.model tmr_voter
+.inputs c0 a0 b0 
+.outputs v0 
+.names a0 b0 _ndc0 
+01 1
+10 1
+.names _ndc0 s$raw_ndb0 
+1 1
+.names c0 b0 s0 _nde0 
+1-1 1
+-10 1
+.names _nde0 v$raw_ndd0 
+1 1
+.names s$raw_ndb0 s0 
+1 1
+.names v$raw_ndd0 v0 
+1 1
+.end
+.model tmr_voter_3bit
+.inputs c<0>0 c<1>0 c<2>0 a<0>0 a<1>0 a<2>0 b<0>0 b<1>0 b<2>0 
+.outputs v<0>0 v<1>0 v<2>0 
+.subckt tmr_voter c0=c<0>0 a0=a<0>0 b0=b<0>0 v0=v<0>0 
+.subckt tmr_voter c0=c<2>0 a0=a<2>0 b0=b<2>0 v0=v<2>0 
+.subckt tmr_voter c0=c<1>0 a0=a<1>0 b0=b<1>0 v0=v<1>0 
+.end
+.model hm_err_cor
+.inputs carry_p<0>0 carry_p<1>0 carry_p<2>0 b_p<0>0 b_p<1>0 b_p<2>0 a_p<0>0 a_p<1>0 a_p<2>0 message<0>0 message<1>0 message<2>0 
+.outputs r_message<0>0 r_message<1>0 r_message<2>0 
+.names a_p<0>0 b_p<0>0 _nfd<0>0 
+01 1
+10 1
+.names _nfd<0>0 carry_p<0>0 _nfe<0>0 
+01 1
+10 1
+.names _nfe<0>0 p1_exp$raw_nfc0 
+1 1
+.names a_p<1>0 b_p<1>0 _n100<0>0 
+01 1
+10 1
+.names _n100<0>0 carry_p<1>0 _n101<0>0 
+01 1
+10 1
+.names _n101<0>0 p2_exp$raw_nff0 
+1 1
+.names a_p<2>0 b_p<2>0 _n103<0>0 
+01 1
+10 1
+.names _n103<0>0 carry_p<2>0 _n104<0>0 
+01 1
+10 1
+.names _n104<0>0 p4_exp$raw_n1020 
+1 1
+.names message<0>0 message<1>0 _n106<0>0 
+01 1
+10 1
+.names _n106<0>0 p1_act$raw_n1050 
+1 1
+.names message<0>0 message<2>0 _n108<0>0 
+01 1
+10 1
+.names _n108<0>0 p2_act$raw_n1070 
+1 1
+.names message<1>0 message<2>0 _n10a<0>0 
+01 1
+10 1
+.names _n10a<0>0 p4_act$raw_n1090 
+1 1
+.names p1_exp0 p1_act0 _n10c0 
+01 1
+10 1
+.names _n10c0 p1_e$raw_n10b0 
+1 1
+.names p2_exp0 p2_act0 _n10e0 
+01 1
+10 1
+.names _n10e0 p2_e$raw_n10d0 
+1 1
+.names p4_exp0 p4_act0 _n1100 
+01 1
+10 1
+.names _n1100 p4_e$raw_n10f0 
+1 1
+.names p1_e0 p2_e0 _n1130 
+11 1
+.names _n1130 message<0>0 _n114<0>0 
+01 1
+10 1
+.names _n114<0>0 _n112<0>0 
+1 1
+.names p1_e0 p4_e0 _n1150 
+11 1
+.names _n1150 message<1>0 _n116<1>0 
+01 1
+10 1
+.names _n116<1>0 _n112<1>0 
+1 1
+.names p1_e0 p2_e0 _n1170 
+11 1
+.names _n1170 p4_e0 _n1180 
+11 1
+.names _n1180 message<2>0 _n119<2>0 
+01 1
+10 1
+.names _n119<2>0 _n112<2>0 
+1 1
+.names _n112<0>0 r_message$raw_n111<0>0 
+1 1
+.names _n112<1>0 r_message$raw_n111<1>0 
+1 1
+.names _n112<2>0 r_message$raw_n111<2>0 
+1 1
+.names p2_act$raw_n1070 p2_act0 
+1 1
+.names p4_exp$raw_n1020 p4_exp0 
+1 1
+.names p1_e$raw_n10b0 p1_e0 
+1 1
+.names p2_exp$raw_nff0 p2_exp0 
+1 1
+.names p4_act$raw_n1090 p4_act0 
+1 1
+.names r_message$raw_n111<0>0 r_message<0>0 
+1 1
+.names r_message$raw_n111<1>0 r_message<1>0 
+1 1
+.names r_message$raw_n111<2>0 r_message<2>0 
+1 1
+.names p1_act$raw_n1050 p1_act0 
+1 1
+.names p2_e$raw_n10d0 p2_e0 
+1 1
+.names p4_e$raw_n10f0 p4_e0 
+1 1
+.names p1_exp$raw_nfc0 p1_exp0 
+1 1
+.end
